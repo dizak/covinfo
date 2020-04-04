@@ -26,8 +26,8 @@ def get_daily_data(
     """
     Return data for a given day
     """
-    if request is None:
-        pass
+    if 'country' in request.args:
+        country = request.args.get('country')
     one_day = datetime.timedelta(1)
     if date is None:
         date = datetime.datetime.today() - one_day
