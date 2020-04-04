@@ -15,7 +15,7 @@ def get_daily_data(
         country='Poland',
         url: str='https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports',#pylint: disable=line-too-long
         extension: str='csv',
-        country_col='Country_Region',
+        country_col='Combined_Key',
         out_cols=[
             'Country_Region',
             'Confirmed',
