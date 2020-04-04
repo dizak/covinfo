@@ -17,7 +17,6 @@ def get_daily_data(
         extension: str='csv',
         country_col='Combined_Key',
         out_cols=[
-            'Country_Region',
             'Confirmed',
             'Deaths',
             'Recovered',
