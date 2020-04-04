@@ -30,5 +30,5 @@ class CovinfoTests(unittest.TestCase):
         """
         Test if get_daily_data returns proper data
         """
-        output = self.main.get_daily_data(self.request)
+        output = self.main.get_daily_data(self.request, country='France')
         print(output)
