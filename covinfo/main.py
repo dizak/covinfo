@@ -22,12 +22,15 @@ def get_daily_data(
             'recov': 'Recovered',
             'active': 'Active',
         },
+        recoveryrate=False,
 ):
     """
     Return data for a given day
     """
     if 'country' in request.args:
         country = request.args.get('country')
+    if 'recoveryrate' in request.args:
+        recoveryrate = True
     one_day = datetime.timedelta(1)
     if date is None:
         date = datetime.datetime.today() - one_day
@@ -42,6 +45,9 @@ def get_daily_data(
         ),
     ))
     today_csv = pd.read_csv(today_csv_url)
-    return today_csv[
+    today_country_csv = today_csv[
         (today_csv[country_col] == country)
-    ][out_cols].to_json(orient='records')
+    ][list(cols.values())]
+    if recoveryrate:
+        return str(float(today_country_csv[cols['recov']] / today_country_csv[cols['conf']] * 100))
+    return today_country_csv.to_json(orient='records')
