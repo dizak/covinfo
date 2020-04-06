@@ -16,12 +16,12 @@ def get_daily_data(
         url: str='https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports',#pylint: disable=line-too-long
         extension: str='csv',
         country_col='Combined_Key',
-        out_cols=[
-            'Confirmed',
-            'Deaths',
-            'Recovered',
-            'Active',
-        ],
+        cols={
+            'conf': 'Confirmed',
+            'deaths': 'Deaths',
+            'recov': 'Recovered',
+            'active': 'Active',
+        },
 ):
     """
     Return data for a given day
