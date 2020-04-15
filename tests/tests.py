@@ -4,6 +4,7 @@ Unit-tests for covinfo module
 """
 
 import unittest
+import json
 
 
 class Request:
@@ -30,9 +31,23 @@ class CovinfoTests(unittest.TestCase):
             'recoveryrate': ''
         }
 
-    def test_get_daily_data(self):
+    def test_get_daily_data_req_empty(self):
+        """
+        Test if get_daily_data returns proper data if request args dict is
+        empty
+        """
+        output = self.main.get_daily_data(self.request_empty)
+        self.assertIsInstance(
+            json.loads(output)[0],
+            dict,
+        )
+
+    def test_get_daily_data_req_args(self):
         """
         Test if get_daily_data returns proper data
         """
-        output = self.main.get_daily_data(self.request, country='France')
-        print(output)
+        output = self.main.get_daily_data(self.request)
+        self.assertIsInstance(
+            float(output),
+            float,
+        )
