@@ -23,8 +23,12 @@ class CovinfoTests(unittest.TestCase):
         from covinfo import main
         self.main = main
 
+        self.request_empty = Request()
         self.request = Request()
-        self.request.args = {'foo': 'bar'}
+        self.request.args = {
+            'country': 'poland',
+            'recoveryrate': ''
+        }
 
     def test_get_daily_data(self):
         """
