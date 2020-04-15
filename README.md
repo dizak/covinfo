@@ -9,3 +9,18 @@ day, Poland, and following output columns:
     - 'Deaths'
     - 'Recovered'
     - 'Active'
+
+The function responds to a simple HTTP request. The arguments are ```country``` and ```recoveryrate```.
+
+Examples:
+
+    - default values, data for Poland:
+
+	```console
+	curl "https://europe-west3-decisive-mapper-272319.cloudfunctions.net/covinfo"
+	```
+    - recovery rate, data for france:
+
+	```console
+	curl "https://europe-west3-decisive-mapper-272319.cloudfunctions.net/covinfo?recoveryrate=&country=france"
+	```
