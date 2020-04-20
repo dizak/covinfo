@@ -51,3 +51,29 @@ def get_daily_data(
     if recoveryrate:
         return str(float(today_country_csv[cols['recov']] / today_country_csv[cols['conf']] * 100))
     return today_country_csv.to_json(orient='records')
+
+
+def get_changerate(
+        request=None,
+        url='https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports',
+        extension='csv',
+):
+    """
+    Get change rate of new cases from last 10 days
+    """
+    deltas = tuple(datetime.timedelta(i) for i in range(1, 15))
+    dates = tuple(datetime.datetime.today() - i for i in deltas)
+    csv_urls = tuple(
+        '/'.join((
+            url.rstrip('/'),
+            '{:02d}-{:02d}-{}.{}'.format(
+                i.month,
+                i.day,
+                i.year,
+                extension,
+            ),
+        ))
+        for i in dates
+    )
+    csvs = pd.concat(tuple(pd.read_csv(i) for i in csv_urls),).reset_index(drop=True)
+    return csvs[(csvs['Combined_Key'] == 'Poland')]['Active'][::-1].pct_change().to_json(orient='records')
