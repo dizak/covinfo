@@ -1,4 +1,4 @@
-#pylint: disable=import-outside-toplevel,too-few-public-methods
+#pylint: disable=import-outside-toplevel,too-few-public-methods,bad-continuation
 """
 Unit-tests for covinfo module
 """
