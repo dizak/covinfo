@@ -60,3 +60,14 @@ class CovinfoTests(unittest.TestCase):
             float(output),
             float,
         )
+
+    def test_get_changerate(self):
+        """
+        Test if get_daily_data return proper data for change rate
+        """
+        output = self.main.get_changerate(self.request)
+        #self.assertIsInstance(
+        #    output,
+        #    float,
+        #)
+        print(output)
