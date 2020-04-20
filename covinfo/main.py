@@ -1,4 +1,4 @@
-#pylint: disable=bad-whitespace,too-many-arguments,import-outside-toplevel,dangerous-default-value
+#pylint: disable=bad-whitespace,too-many-arguments,import-outside-toplevel,dangerous-default-value,line-too-long
 
 """
 Utility functions
@@ -13,7 +13,7 @@ def get_daily_data(
         request=None,
         date=None,
         country='Poland',
-        url: str='https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports',#pylint: disable=line-too-long
+        url: str='https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports',
         extension: str='csv',
         country_col='Combined_Key',
         cols={
