@@ -13,6 +13,15 @@ class Request:
     """
     args = {}
 
+    def get(
+        self,
+        key,
+    ):
+        """
+        Return args
+        """
+        return self.args[key]
+
 class CovinfoTests(unittest.TestCase):
     """
     Tests of covinfo module
