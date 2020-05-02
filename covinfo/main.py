@@ -75,7 +75,7 @@ def get_changerate(
             var data = google.visualization.arrayToDataTable({0});
 
             var options = {{
-              title: 'Number of Sick Daily Relative Change Rate in Poland',
+              title: 'Number of Sick Daily Relative Change Rate in {1}',
               curveType: 'function',
               legend: {{ position: 'bottom' }}
             }};
