@@ -56,6 +56,7 @@ def get_daily_data(
 def get_changerate(
         request=None,
         days_back=23,
+        country='Poland',
         url='https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports',
         extension='csv',
 ):
