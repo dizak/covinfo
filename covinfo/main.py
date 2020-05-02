@@ -91,7 +91,7 @@ def get_changerate(
     </html>
     """
     if 'days' in request.args:
-        days_back = int(request.get('days'))
+        days_back = int(request.args.get('days'))
     if 'country' in request.args:
         country = request.args.get('country').title()
     deltas = tuple(datetime.timedelta(i) for i in range(2, days_back))
