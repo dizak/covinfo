@@ -35,6 +35,11 @@ class CovinfoTests(unittest.TestCase):
 
         self.request_empty = Request()
         self.request = Request()
+        self.request_portugal_days_10 = Request()
+        self.request_portugal_days_10.args = {
+                'country': 'portugal',
+                'days': 10,
+        }
         self.request.args = {
             'country': 'poland',
             'recoveryrate': ''
@@ -65,7 +70,7 @@ class CovinfoTests(unittest.TestCase):
         """
         Test if get_daily_data return proper data for change rate
         """
-        output = self.main.get_changerate(self.request)
+        output = self.main.get_changerate(self.request_portugal_days_10)
         #self.assertIsInstance(
         #    output,
         #    float,
