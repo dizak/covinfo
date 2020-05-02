@@ -72,7 +72,7 @@ def get_changerate(
           google.charts.setOnLoadCallback(drawChart);
 
           function drawChart() {{
-            var data = google.visualization.arrayToDataTable({});
+            var data = google.visualization.arrayToDataTable({0});
 
             var options = {{
               title: 'Number of Sick Daily Relative Change Rate in Poland',
