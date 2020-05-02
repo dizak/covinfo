@@ -106,4 +106,17 @@ def get_changerate(
         for i in dates
     )
     csvs = pd.concat(tuple(pd.read_csv(i) for i in csv_urls),).reset_index(drop=True)
-    return csvs[(csvs['Combined_Key'] == 'Poland')]['Active'][::-1].pct_change().to_json(orient='records')
+    csvs['Last_Update'] = pd.to_datetime(csvs['Last_Update'])
+    csvs_country_inverted = csvs[(csvs['Combined_Key'] == 'Poland')][['Last_Update', 'Active']][::-1]
+    csvs_selected = pd.concat(
+        [
+            csvs_country_inverted['Last_Update'],
+            csvs_country_inverted['Active'].pct_change(),
+        ],
+        axis=1,
+    )
+    csvs_selected.dropna(inplace=True)
+    csvs_selected['Last_Update'] = csvs_selected['Last_Update'].astype(str)
+    csvs_list = csvs_selected.values.tolist()
+    csvs_list.insert(0, list(csvs_selected.columns))
+    return js_template.format(csvs_list)
