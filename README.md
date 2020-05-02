@@ -18,6 +18,8 @@ Examples:
 
 	```console
 	curl "https://europe-west3-decisive-mapper-272319.cloudfunctions.net/covinfo"
+
+	curl "https://europe-west3-decisive-mapper-272319.cloudfunctions.net/changerate"
 	```
     - recovery rate, data for france:
 
