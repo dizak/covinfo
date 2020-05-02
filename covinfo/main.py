@@ -92,6 +92,8 @@ def get_changerate(
     """
     if 'days' in request.args:
         days_back = int(request.get('days'))
+    if 'country' in request.args:
+        country = request.args.get('country').title()
     deltas = tuple(datetime.timedelta(i) for i in range(2, days_back))
     dates = tuple(datetime.datetime.today() - i for i in deltas)
     csv_urls = tuple(
@@ -108,7 +110,7 @@ def get_changerate(
     )
     csvs = pd.concat(tuple(pd.read_csv(i) for i in csv_urls),).reset_index(drop=True)
     csvs['Last_Update'] = pd.to_datetime(csvs['Last_Update'])
-    csvs_country_inverted = csvs[(csvs['Combined_Key'] == 'Poland')][['Last_Update', 'Active']][::-1]
+    csvs_country_inverted = csvs[(csvs['Combined_Key'] == country)][['Last_Update', 'Active']][::-1]
     csvs_selected = pd.concat(
         [
             csvs_country_inverted['Last_Update'],
@@ -120,4 +122,4 @@ def get_changerate(
     csvs_selected['Last_Update'] = csvs_selected['Last_Update'].astype(str)
     csvs_list = csvs_selected.values.tolist()
     csvs_list.insert(0, list(csvs_selected.columns))
-    return js_template.format(csvs_list)
+    return js_template.format(csvs_list, country)
