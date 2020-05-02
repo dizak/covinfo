@@ -61,7 +61,37 @@ def get_changerate(
     """
     Get change rate of new cases from last 10 days
     """
-    deltas = tuple(datetime.timedelta(i) for i in range(1, 15))
+    js_template = """
+    <html>
+      <head>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+          google.charts.load('current', {{'packages':['corechart']}});
+          google.charts.setOnLoadCallback(drawChart);
+
+          function drawChart() {{
+            var data = google.visualization.arrayToDataTable({});
+
+            var options = {{
+              title: 'Number of Sick Daily Relative Change Rate in Poland',
+              curveType: 'function',
+              legend: {{ position: 'bottom' }}
+            }};
+
+            var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+            chart.draw(data, options);
+          }}
+        </script>
+      </head>
+      <body>
+        <div id="curve_chart" style="width: 900px; height: 500px"></div>
+      </body>
+    </html>
+    """
+    if 'days' in request.args:
+        days_back = int(request.get('days'))
+    deltas = tuple(datetime.timedelta(i) for i in range(2, days_back))
     dates = tuple(datetime.datetime.today() - i for i in deltas)
     csv_urls = tuple(
         '/'.join((
